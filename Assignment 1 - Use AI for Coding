@@ -1,0 +1,54 @@
+def get_user_move():
+    move = input("Enter your move (in chess notation, e.g., 'e2e4'): ")
+    return move.upper()
+
+def make_computer_move(difficulty, user_color):
+    # Simulate computer move based on difficulty
+    # For easy difficulty, make a random move
+    # For hard difficulty, make a slightly smarter move (random for simplicity)
+    # You can replace this with a more sophisticated chess engine for better AI
+    import random
+
+    if difficulty == 'easy':
+        return random.choice(['e2e4', 'd2d4', 'g1f3', 'b1c3', 'f1e2'])
+    else:
+        # Add more variety for hard difficulty
+        return random.choice(['e2e4', 'd2d4', 'g1f3', 'b1c3', 'f1e2', 'e7e5', 'd7d5', 'g8f6', 'b8c6', 'f8e7'])
+
+def play_chess():
+    moves = []
+    
+    # Determine if the user plays as white or black
+    user_color = input("Do you want to play as White or Black? ").lower()
+    computer_color = 'white' if user_color == 'black' else 'black'
+    print(f"You are playing as {user_color.capitalize()}.")
+
+    # Determine difficulty level
+    difficulty = input("Choose difficulty (easy/hard): ").lower()
+
+    while True:
+        if user_color == 'white':
+            user_move = get_user_move()
+            # Implement move validation logic here if needed
+            # For simplicity, assume all user moves are valid
+            print(f"You ({user_color}) played: {user_move}")
+            moves.append(f"{user_color.capitalize()}: {user_move}")
+        else:
+            print("Computer is thinking...")
+            computer_move = make_computer_move(difficulty, user_color)
+            print(f"You ({user_color}) played: {computer_move}")
+            moves.append(f"{user_color.capitalize()}: {computer_move}")
+
+        # Print the moves made so far
+        print("Moves:")
+        print("\n".join(moves))
+
+        # Check for checkmate or stalemate
+        # Implement the logic to check for these conditions
+        # For simplicity, assume the game continues indefinitely
+
+        # Switch turns
+        user_color, computer_color = computer_color, user_color
+
+if __name__ == "__main__":
+    play_chess()
